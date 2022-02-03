@@ -19,7 +19,10 @@
 #
 ##############################################################################
 
-import xmlrpclib
+try:
+    import xmlrpclib
+except ImportError:
+    import xmlrpc.client as xmlrpclib
 
 from oerplib.rpc import netrpclib, xmlrpclib_custom, error
 

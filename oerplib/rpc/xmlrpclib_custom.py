@@ -19,11 +19,22 @@
 #
 ##############################################################################
 
-import xmlrpclib
-import httplib
+try:
+    import xmlrpclib
+except ImportError:
+    from xmlrpc import client as xmlrpclib
+
+try:
+    import httplib
+except ImportError:
+    from http import client as httplib
 import socket
 import sys
-from urlparse import urlparse
+
+try:
+    from urlparse import urlparse
+except ImportError:
+    from urllib.parse import urlparse
 
 # Defined later following the version of Python used
 TimeoutTransport = None  

@@ -18,6 +18,8 @@ OERPLib
 **OERPLib** is a Python module providing an easy way to
 pilot your **OpenERP** and **Odoo** servers through `RPC`.
 
+This version is forked from the original `OERPLib <https://github.com/osiell/oerplib>`_ 0.8.4
+
 Features supported:
     - `XML-RPC` and (legacy) `Net-RPC` protocols,
     - access to all methods proposed by a model class
@@ -68,6 +70,13 @@ How does it work? See below:
 
 See the documentation for more details and features.
 
+Installing
+--------------------------------------
+If you need install from sources:
+
+`python setup.py build_doc`
+`python setup.py install`
+
 Supported OpenERP/Odoo server versions
 --------------------------------------
 
@@ -78,7 +87,7 @@ It should work on next versions if `Odoo` keeps a stable API.
 Supported Python versions
 -------------------------
 
-`OERPLib` support Python versions 2.6, 2.7.
+`OERPLib` support Python versions 2.6, 2.7, 3.8
 
 License
 -------

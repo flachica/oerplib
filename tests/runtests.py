@@ -24,6 +24,22 @@ from test_inspect import TestInspect
 
 from oerplib.tools import v
 
+def runTest(suite, f):
+    # Run all tests
+    if ARGS.test_xmlrpc:
+        print("-- RUN (XMLRPC) --")
+        ARGS.protocol = 'xmlrpc'
+        ARGS.port = int(ARGS.xmlrpc_port)
+        unittest.TextTestRunner(verbosity=ARGS.verbosity, stream=f).run(suite)
+    if ARGS.test_netrpc:
+        print("-- RUN (NETRPC) --")
+        ARGS.protocol = 'netrpc'
+        ARGS.port = int(ARGS.netrpc_port)
+        unittest.TextTestRunner(verbosity=ARGS.verbosity, stream=f).run(suite)
+    if not ARGS.test_xmlrpc and not ARGS.test_netrpc:
+        print("-- NO TEST --")
+        print("Please use '--test_xmlrpc' and/or '--test_netrpc' option.")
+
 if __name__ == '__main__':
     suite = unittest.TestSuite()
 
@@ -93,19 +109,12 @@ if __name__ == '__main__':
     else:
         print("-- TestDBDrop skipped --")
 
-    # Run all tests
-    if ARGS.test_xmlrpc:
-        print("-- RUN (XMLRPC) --")
-        ARGS.protocol = 'xmlrpc'
-        ARGS.port = int(ARGS.xmlrpc_port)
-        unittest.TextTestRunner(verbosity=ARGS.verbosity).run(suite)
-    if ARGS.test_netrpc:
-        print("-- RUN (NETRPC) --")
-        ARGS.protocol = 'netrpc'
-        ARGS.port = int(ARGS.netrpc_port)
-        unittest.TextTestRunner(verbosity=ARGS.verbosity).run(suite)
-    if not ARGS.test_xmlrpc and not ARGS.test_netrpc:
-        print("-- NO TEST --")
-        print("Please use '--test_xmlrpc' and/or '--test_netrpc' option.")
+    if (ARGS.log_file):
+        log_file = ARGS.log_file
+        with open(log_file, "w") as f:
+            runTest(suite, f)
+    else:
+        runTest(suite, None)
+       
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

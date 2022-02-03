@@ -27,6 +27,10 @@ import datetime
 from oerplib import error
 from oerplib.service.osv import browse
 
+try:
+    basestring
+except:
+    basestring = str
 
 def is_int(value):
     """Return `True` if ``value`` is an integer."""

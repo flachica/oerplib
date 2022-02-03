@@ -31,6 +31,10 @@ from oerplib import rpc, error, tools
 from oerplib.tools import session, v
 from oerplib.service import common, db, wizard, osv, inspect
 
+try:
+   long
+except NameError:
+   long = int
 
 class OERP(object):
     """Return a new instance of the :class:`OERP` class.
@@ -391,7 +395,7 @@ class OERP(object):
             content = zlib.decompress(content)
 
         if data['format'] in ['pdf', 'html', 'doc', 'xls',
-                              'sxw', 'odt', 'tiff', 'txt']:
+                              'sxw', 'odt', 'tiff']:
             if data['format'] == 'html' and os.name == 'nt':
                 data['format'] = 'doc'
             (file_no, file_path) = tempfile.mkstemp('.' + data['format'],

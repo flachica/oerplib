@@ -1,3 +1,9 @@
+0.8.5
+=====
+
+- ADD: Support python 3.8
+- ADD: In testing add parameter `log_file` to specify the log file destination
+
 0.8.4
 =====
 - FIX: Auto-discovery the Odoo version via HTTPS (fixes #9)

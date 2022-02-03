@@ -279,7 +279,7 @@ def get_connector(server, port=8069, protocol='xmlrpc',
     if protocol not in PROTOCOLS:
         txt = ("The protocol '{0}' is not supported. "
                "Please choose a protocol among these ones: {1}")
-        txt = txt.format(protocol, PROTOCOLS.keys())
+        txt = txt.format(protocol, list(PROTOCOLS.keys()))
         raise error.ConnectorError(txt)
     return PROTOCOLS[protocol](server, port, timeout, version)
 

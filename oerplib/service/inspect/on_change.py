@@ -72,10 +72,14 @@ def _scan_view(model, view_name, view_data, result):
             if field not in result[model][func][view_name]:
                 result[model][func][view_name][field] = []
             if args and args not in result[model][func][view_name][field]:
-                args = map(_clean_arg, args)
+                args = list(map(_clean_arg, args))
                 result[model][func][view_name][field] = args
     # Scan recursively all other sub-descriptions defined in the view
-    for field_name, field_data in view_data['fields'].iteritems():
+    try:
+        fields_items = view_data['fields'].iteritems()
+    except Exception:
+        fields_items = view_data['fields'].items()
+    for field_name, field_data in fields_items:
         if field_data.get('views') and field_data['views'].get('form'):
             model = field_data['relation']
             if field_data['views'].get('form'):

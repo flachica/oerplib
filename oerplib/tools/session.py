@@ -23,7 +23,10 @@ in `OERPLib`.
 """
 import os
 import stat
-from ConfigParser import SafeConfigParser
+try:
+    from ConfigParser import SafeConfigParser
+except ImportError:
+    from configparser import SafeConfigParser
 
 from oerplib import error
 

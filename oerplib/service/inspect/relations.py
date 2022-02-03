@@ -144,10 +144,14 @@ class Relations(object):
         # Scan relational fields of the data model
         fields = obj.fields_get()
         if obj._name not in self._relations:
+            try:
+                fields_items = fields.iteritems()
+            except Exception:
+                fields_items = fields.items()
             self._relations[obj._name] = {
                 'relations': {},
                 'relations_r': {},  # Recursive relations
-                'fields': dict((k, v) for k, v in fields.iteritems()
+                'fields': dict((k, v) for k, v in fields_items
                                if not v.get('relation')),
             }
         for name, data in fields.iteritems():
@@ -254,7 +258,11 @@ class Relations(object):
         output = pydot.Dot(
             graph_type='digraph', overlap='scalexy', splines='true',
             nodesep=str(self._config['space_between_models']))
-        for model, data in self._relations.iteritems():
+        try:
+            relation_items = self._relations.iteritems()
+        except Exception:
+            relation_items = self._relations.items()
+        for model, data in relation_items:
             # Generate attributes of the model
             attrs_ok = False
             attrs = []
@@ -269,7 +277,11 @@ class Relations(object):
                     color=self._config['model_color_subtitle'],
                     title="Attributes")
                 attrs.append(subtitle)
-                for k, v in sorted(data['fields'].iteritems()):
+                try:
+                    fields_items = sorted(data['fields'].iteritems())
+                except Exception:
+                    fields_items = sorted(data['fields'].items())
+                for k, v in fields_items:
                     color_name = self._config['color_normal']
                     if v.get('function'):
                         color_name = self._config['color_function']
@@ -289,7 +301,11 @@ class Relations(object):
                     color=self._config['model_color_subtitle'],
                     title="Recursive relations")
                 relations_r.append(subtitle)
-            for data2 in data['relations_r'].itervalues():
+            try:
+                itervalues = data['relations_r'].itervalues()
+            except Exception:
+                itervalues = data['relations_r'].values()
+            for data2 in itervalues:
                 label = self._generate_relation_label(data2)
                 flags = self._generate_flags_label(data2)
                 rel_r = TPL_MODEL_REL.format(
@@ -312,7 +328,11 @@ class Relations(object):
             node = self._create_node(model, 'relation', tpl)
             output.add_node(node)
             # Draw relations of the model
-            for data2 in data['relations'].itervalues():
+            try:
+                itervalues = data['relations'].itervalues()
+            except Exception:
+                itervalues = data['relations'].values()
+            for data2 in itervalues:
                 if data2['relation'] in self._relations:
                     edge = self._create_edge(model, data2['relation'], data2)
                     output.add_edge(edge)

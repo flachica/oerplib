@@ -189,14 +189,22 @@ class Dependencies(object):
                 'installed': data['state'] in states_inst
             }
         # Dispatch data models in their related modules
-        for model, data in models.iteritems():
+        try:
+            model_items = models.iteritems()
+        except Exception:
+            model_items = models.items()
+        for model, data in model_items:
             for module in data['modules']:
                 if module in modules_full \
                         and model not in modules_full[module]['models']:
                     modules_full[module]['models'].append(model)
         # Compute the list of modules related to data models
         if self._restrict:
-            for model, data in models.iteritems():
+            try:
+                model_items = models.iteritems()
+            except Exception:
+                model_items = models.items()
+            for model, data in model_items:
                 for module in data['modules']:
                     if module not in modules:
                         modules[module] = {
@@ -240,7 +248,7 @@ class Dependencies(object):
         # In restrict mode, fix modules similar to "root" module (with no direct
         # dependency) while they may have indirect dependencies
         if self._restrict:
-            for name, data in self._modules.items():  # Avoid iter modification
+            for name, data in list(self._modules.items()):  # Avoid iter modification
                 # Detect fake "root" module
                 if not data['depends'] and self._modules_full[name]['depends']:
                     self._fix_fake_root_module(name)
@@ -397,7 +405,11 @@ class Dependencies(object):
                 comment=tpl_comment or '')
             return tpl
 
-        for module, data in self._modules.iteritems():
+        try:
+            module_items = self._modules.iteritems()
+        except Exception:
+            module_items = self._modules.items()
+        for module, data in module_items:
             if not data['keep']:
                 continue
             # Add the module as node

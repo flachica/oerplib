@@ -42,6 +42,9 @@ _parser.add_argument('--drop_db', action='store_true',
 _parser.add_argument('--verbosity', default=2, type=int,
                      help="Output verbosity of unittest")
 
+_parser.add_argument('--log_file', default=None,
+                     help="Where to write the log")
+
 ARGS = _parser.parse_args()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

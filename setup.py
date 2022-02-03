@@ -3,16 +3,16 @@
 import os
 from distutils.core import setup
 
-name = 'OERPLib'
-version = '0.8.4'
-description = ("OERPLib is a Python module providing an easy way to "
+name = 'OERPLib-py3'
+version = '0.8.5'
+description = ("OERPLib-py3 is a Python module providing an easy way to "
                "pilot your OpenERP and Odoo servers through RPC.")
 keywords = ("openerp odoo server client xml-rpc xmlrpc net-rpc netrpc "
             "oerplib communication lib library python service web webservice")
 author = "ABF Osiell - Sebastien Alix"
 author_email = 'sebastien.alix@osiell.com'
-url = 'http://pythonhosted.org/OERPLib/'
-download_url = 'http://pypi.python.org/packages/source/O/OERPLib/OERPLib-%s.tar.gz' % version
+url = 'http://pythonhosted.org/OERPLib-py3/'
+download_url = 'http://pypi.python.org/packages/source/O/OERPLib/OERPLib-py3-%s.tar.gz' % version
 license = 'LGPL v3'
 doc_build_dir = 'doc/build'
 doc_source_dir = 'doc/source'
@@ -61,6 +61,7 @@ setup(name=name,
           "Programming Language :: Python",
           "Programming Language :: Python :: 2.6",
           "Programming Language :: Python :: 2.7",
+          "Programming Language :: Python :: 3.8",
           "Programming Language :: Python :: Implementation :: CPython",
           "License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)",
           "Topic :: Software Development :: Libraries :: Python Modules",
